@@ -1,0 +1,15 @@
+# Synker hub. Start it with: docker compose up -d
+
+services:
+  synker:
+    image: ghcr.io/tutur1307/synker:latest
+    container_name: synker
+    restart: unless-stopped
+    ports:
+      - "8484:8484"
+    volumes:
+      # Database and save archives, next to this file. Back this folder up.
+      - ./data:/data
+    environment:
+      # Your time zone (it can also be set later in the Settings tab).
+      TZ: Etc/UTC
