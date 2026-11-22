@@ -31,6 +31,23 @@ The database and save archives are in the `data` folder next to `docker-compose.
 
 If the interface doesn’t open, check that the container is running and that your device can reach port `8484` on the hub. A working hub also returns `"status":"ok"` at `http://<hub-IP>:8484/api/health`.
 
+## Remote access with Tailscale
+
+Install [Tailscale](https://tailscale.com/docs/install) on the machine running the Synker hub. Find its Tailscale IPv4 address in [Machines](https://login.tailscale.com/admin/machines). In Synker, use `http://<hub-Tailscale-IP>:8484`, for example `http://100.101.102.103:8484`. Keep port 8484 private on your internet router.
+
+### Switch, Switch Lite and Switch OLED
+
+1. Install [tailscale-nx](https://github.com/UnderwaterOverground/tailscale-nx#install) on a Switch running Atmosphère. Open it in Ultrahand and scan its QR code to join the same Tailscale network as the hub.
+2. Install the `Synker.nro` from [Synker 3.3.5](https://github.com/tutur1307/Synker-site/releases/tag/v3.3.5) or later. The same file is used on all three Switch models.
+3. Launch Synker from the Homebrew Menu. In **Settings → Hub address**, enter the hub's Tailscale URL. If you have already paired with that hub, changing its address keeps the pairing. **Settings → App version** checks whether the hub responds before you sync.
+
+This setup has been tested with Synker's foreground app. Background sync runs in a separate sysmodule and still needs verification over tailscale-nx.
+
+### 3DS, Android and Windows
+
+- **3DS:** Connect the console to a Wi-Fi router that can forward its clients' traffic to Tailscale, then enter the hub's Tailscale URL in Synker. For example, use a compatible [GL.iNet router with IP Masquerading](https://docs.gl-inet.com/router/en/4/interface_guide/tailscale/#ip-masquerading). Set its Wi-Fi to 2.4 GHz with WPA2-AES for the [3DS](https://en-americas-support.nintendo.com/app/answers/detail/a_id/498/~/compatible-wireless-modes-and-wireless-security-types).
+- **Android and Windows:** Install the [Tailscale app](https://tailscale.com/download) on the device, join the same Tailscale network as the hub, and use the hub's Tailscale URL in Synker. You can test the connection in a browser at `http://<hub-Tailscale-IP>:8484/api/health`.
+
 ### Update the hub
 
 From the folder with `docker-compose.yml`, run:
