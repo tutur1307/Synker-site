@@ -41,7 +41,9 @@ Install [Tailscale](https://tailscale.com/docs/install) on the machine running t
 2. Install the `Synker.nro` from [Synker 3.3.5](https://github.com/tutur1307/Synker-site/releases/tag/v3.3.5) or later. The same file is used on all three Switch models.
 3. Launch Synker from the Homebrew Menu. In **Settings → Hub address**, enter the hub's Tailscale URL. If you have already paired with that hub, changing its address keeps the pairing. **Settings → App version** checks whether the hub responds before you sync.
 
-This setup has been tested with Synker's foreground app. Background sync runs in a separate sysmodule and still needs verification over tailscale-nx.
+4. To sync in the background as well, use [Synker 3.4.1](https://github.com/tutur1307/Synker-site/releases/tag/v3.4.1) or later and turn on **Settings → Background sync**. Then restart the console once. Background sync runs as a separate sysmodule, which tailscale-nx only puts on your Tailscale network when it is listed in tailscale-nx's settings. Synker adds it to `/config/tailscale-nx/config.ini` for you, and tailscale-nx reads that file when the console starts. If you install tailscale-nx after turning on background sync, open Synker once, then restart the console.
+
+If background sync cannot reach the hub, Synker's **Activity** tab shows "Cannot reach the hub".
 
 ### 3DS, Android and Windows
 
